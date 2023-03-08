@@ -38,11 +38,7 @@ int main()
                     arr[i] = i + 1;
                 }
                 else
-                {
-                    F
-                        // cout << "NO" << endl;
                         break;
-                }
             }
         }
         if (arr[0] == 2 && arr[1] == 1)
