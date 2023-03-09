@@ -1,63 +1,48 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
+typedef long long int ll;
+const char nl = '\n';
+#define trav(a, x) for (auto &a : (x))
 
-int main()
+int main() 
 {
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        int n;
-        cin >> n;
-        int *arr = new int[n];
-        for (int i = 0; i < n; i++)
-        {
-            cin >> arr[i];
-        }
-        int count = 0;
-        for (int i = n - 1; i >= 2; i--)
-        {
-            if (arr[i] == i + 1)
-            {
-                continue;
-            }
-            else
-            {
-                if (arr[i - 1] == i + 1)
-                {
-                    count += 1;
-                    int temp = arr[i];
-                    arr[i] = arr[i - 1];
-                    arr[i - 1] = temp;
-                }
-                else if (arr[i - 2] == i + 1)
-                {
-                    count += 2;
-                    arr[i - 2] = arr[i - 1];
-                    arr[i - 1] = arr[i];
-                    arr[i] = i + 1;
-                }
-                else
-                        break;
-            }
-        }
-        if (arr[0] == 2 && arr[1] == 1)
-        {
-            arr[0] = 1;
-            arr[1] = 2;
-            count += 1;
-            cout << "YES" << endl
-                 << count << endl;
-        }
-        else if (arr[0] == 1 && arr[1] == 2)
-        {
-            cout << "YES" << endl
-                 << count << endl;
-        }
-        else
-        {
-            cout << "NO" << endl;
-        }
+  int t;
+  cin>>t;
+  while(t--) {
+    int n;
+    cin>>n;
+    vector<int> v(n);
+    for(int i = 0; i < n; i++) {
+      cin>>v[i];
     }
-    return 0;
+    int i = 0, cnt = 0;
+    int *umap = new int[n + 1]{0};
+      
+    while(i < n - 1) {
+      if(i < n - 1 && v[i] > v[i + 1] && umap[v[i]] < 2 && umap[v[i + 1]] < 2) {        
+    	  umap[v[i]]++;                               
+    	  umap[v[i + 1]]++; 
+        cnt++;
+        swap(v[i], v[i + 1]);
+      } 
+      if(i < n - 2 && v[i] > v[i + 2] && umap[v[i]] < 2 && umap[v[i + 2]] < 2) {   
+        umap[v[i + 2]]++; 
+        cnt++;
+        swap(v[i], v[i + 2]);
+      }
+      i++;
+    }
+    
+    delete[] umap;
+      
+    for(int i = 0; i < n - 1; i++) {
+      if(v[i + 1] != v[i] + 1) {
+        cout<<"NO"<<endl;
+        break;
+      }
+      if(i == n - 2) cout<<"YES"<<endl<<cnt<<endl;
+    }
+  }  	
+    
+  return 0;
 }
