@@ -1,5 +1,5 @@
-1. b
-2. c
-3. c
-4. c
-5. c
+1. b // log(n) base k
+2. c // O(n)
+3. c // O(n^2)
+4. c // x*y
+5. c // Red-black Tree
